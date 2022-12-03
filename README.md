@@ -15,17 +15,17 @@
 
 ```
 Index page
-![](main/resources/image/index.png "index")
+![](src/main/resources/image/index.png "index")
 ```
 ```
 User page
-![](main/resources/image/user.png "user")
+![](src/main/resources/image/user.png "user")
 ```
 ```
 Admin page
-![](main/resources/image/admin.png "admin")
+![](src/main/resources/image/admin.png "admin")
 ```
 ```
 Add/Edit page
-![](main/resources/image/edit.png "edit")
+![](src/main/resources/image/edit.png "edit")
 ```
