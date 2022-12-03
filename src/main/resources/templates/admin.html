@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User info</title>
+    <title>Adming page</title>
 </head>
 
 <style>
@@ -26,7 +26,7 @@
 
 <body>
 
-<h2>User info</h2>
+<h2>Users List</h2>
 <br>
 
 <table>
@@ -39,9 +39,9 @@
         <th>Login</th>
         <th>Password</th>
         <th>Role</th>
+        <th>Operations</th>
     </tr>
-
-    <th:block th:object="${user}">
+    <th:block th:each="user : ${users}">
         <tr>
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getGender()}"/>
@@ -51,11 +51,22 @@
             <td th:text="${user.getUsername()}"/>
             <td th:text="${user.getPassword()}"/>
             <td th:text="${user.getRoles()}"/>
+            <td>
+                <form th:method="post" th:action="@{/admin/editUser/{id}(id=${user.getId()})}">
+                    <input type="submit" value="edit"/>
+                </form>
+                <form th:method="post" th:action="@{/admin/deleteUser/{id}(id=${user.getId()})}">
+                    <input type="submit" value="delete"/>
+                </form>
+            </td>
         </tr>
     </th:block>
 </table>
 <br>
-<form th:action="@{/logout}" method="post">
+<form method="post" th:action="@{/admin/addUser}">
+    <input type="submit" value="add new user">
+</form>
+<form method="post" th:action="@{/logout}">
     <input type="submit" value="logout">
 </form>
 
