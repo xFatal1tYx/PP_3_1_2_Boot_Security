@@ -1,63 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>User info</title>
+    <title>User page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<style>
-    body {
-        text-align: center;
-    }
 
-    table,
-    th,
-    td {
-        margin: 0 auto;
-        padding: 10px;
-        border: 2px solid gray;
-        border-collapse: collapse;
-    }
-
-    form {
-        display: inline;
-    }
-</style>
-
-<body>
-
-<h2>User info</h2>
+<body class="bg-light">
+<nav class="navbar bg-dark text-white">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <b><span th:text="*{logged.getUsername()}"></span></b>
+            <span th:text="' with roles ' + *{logged.getRoles()}"></span>
+        </a>
+        <form method="post" th:action="@{/logout}">
+            <button type="submit" class="btn btn-dark text-secondary">
+                Logout
+            </button>
+        </form>
+    </div>
+</nav>
 <br>
+<div class="container-fluid">
+    <div class="row" style="height: 100vh">
+        <div class="col-md-2 bg-white">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasAuthority('ADMIN')" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" sec:authorize="hasAnyAuthority('ADMIN','USER')" href="/user">User</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <h1>User information-page</h1>
+            <div class="card">
+                <h5 class="card-header bg-light">About user</h5>
+                <div class="card-body">
+                    <table class="table table-striped bg-white">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Gender</th>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Age</th>
+                            <th>Login</th>
+                            <th>Role</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:object="${logged}">
+                            <tr>
+                                <td th:text="${logged.getId()}"/>
+                                <td th:text="${logged.getGender()}"/>
+                                <td th:text="${logged.getName()}"/>
+                                <td th:text="${logged.getSurname()}"/>
+                                <td th:text="${logged.getAge()}"/>
+                                <td th:text="${logged.getUsername()}"/>
+                                <td th:text="${logged.getRoles()}"/>
+                            </tr>
+                        </th:block>
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Gender</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Age</th>
-        <th>Login</th>
-        <th>Password</th>
-        <th>Role</th>
-    </tr>
-
-    <th:block th:object="${user}">
-        <tr>
-            <td th:text="${user.getId()}"/>
-            <td th:text="${user.getGender()}"/>
-            <td th:text="${user.getName()}"/>
-            <td th:text="${user.getSurname()}"/>
-            <td th:text="${user.getAge()}"/>
-            <td th:text="${user.getUsername()}"/>
-            <td th:text="${user.getPassword()}"/>
-            <td th:text="${user.getRoles()}"/>
-        </tr>
-    </th:block>
-</table>
-<br>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="logout">
-</form>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

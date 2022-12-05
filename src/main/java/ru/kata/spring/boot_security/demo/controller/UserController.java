@@ -20,8 +20,8 @@ public class UserController {
 
     @GetMapping("/user")
     public String showUser(Model model, Principal principal) {
-        User user = userService.getByUsername(principal.getName());
-        model.addAttribute("user", user);
+        User logged = userService.getByUsername(principal.getName());
+        model.addAttribute("logged", logged);
         return "user";
     }
 }

@@ -25,9 +25,9 @@ public class TestInit {
 
     @PostConstruct
     public void addDefaultUsers() {
-        Role roleUser = new Role("ROLE_USER");
-        Role roleAdmin = new Role("ROLE_ADMIN");
-        Role roleGuest = new Role("ROLE_GUEST");
+        Role roleUser = new Role("USER");
+        Role roleAdmin = new Role("ADMIN");
+        Role roleGuest = new Role("GUEST");
         roleRepository.save(roleUser);
         roleRepository.save(roleAdmin);
         roleRepository.save(roleGuest);

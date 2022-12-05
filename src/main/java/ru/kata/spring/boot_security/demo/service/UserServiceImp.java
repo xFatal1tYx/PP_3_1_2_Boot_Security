@@ -32,11 +32,6 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getUserById(long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    @Override
     @Transactional
     public void saveUser(User user, String[] selectedRoles) {
         String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
