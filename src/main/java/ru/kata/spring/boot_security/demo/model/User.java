@@ -28,13 +28,14 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Gender gender, String name, String surname, Byte age, String username, String password) {
+    public User(Gender gender, String name, String surname, Byte age, String username, String password, Set<Role> roles) {
         this.gender = gender;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {

@@ -5,25 +5,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
 
-    public UserServiceImp(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -33,12 +31,9 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(User user, String[] selectedRoles) {
+    public void saveUser(User user) {
         String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(encodedPassword);
-        Set<Role> roles = new HashSet<>();
-        Arrays.stream(selectedRoles).forEach(r -> roles.add(roleRepository.findByRole(r)));
-        user.setRoles(roles);
         userRepository.save(user);
     }
 

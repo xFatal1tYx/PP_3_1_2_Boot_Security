@@ -63,201 +63,7 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <th:block th:each="user : ${users}">
-                                <tr>
-                                    <td th:text="${user.getId()}"/>
-                                    <td th:text="${user.getGender()}"/>
-                                    <td th:text="${user.getName()}"/>
-                                    <td th:text="${user.getSurname()}"/>
-                                    <td th:text="${user.getAge()}"/>
-                                    <td th:text="${user.getUsername()}"/>
-                                    <td th:text="${user.getRoles()}"/>
-                                    <td>
-                                        <button type="button" class="btn btn-info" data-toggle="modal"
-                                                th:data-target="${'#editModal' + user.getId()}">
-                                            Edit
-                                        </button>
-                                        <div class="modal fade" th:id="${'editModal' + user.getId()}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Edit user</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body text-center">
-                                                        <form th:action="@{/admin/saveUser}" method="post">
-                                                            <b><label for="inputIdEdit">ID</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputIdEdit"
-                                                                   th:name="id" name="id" th:value="${user.getId()}"
-                                                                   style="width: 300px" readonly/>
-                                                            <br><br>
-
-                                                            <label>
-                                                                <input hidden type="radio"
-                                                                       th:name="gender" th:value="M"
-                                                                       th:checked="${user.getGender().toString()} == 'M'">
-                                                            </label>
-                                                            <label>
-                                                                <input hidden type="radio"
-                                                                       th:name="gender" th:value="F"
-                                                                       th:checked="${user.getGender().toString()} == 'F'">
-                                                            </label>
-
-                                                            <b><label for="inputNameEdit">Name</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputNameEdit"
-                                                                   th:name="name" th:value="${user.getName()}"
-                                                                   minlength="2" maxlength="50"
-                                                                   style="width: 300px" required/>
-                                                            <br><br>
-
-                                                            <b><label for="inputSurnameEdit">Surname</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputSurnameEdit"
-                                                                   th:name="surname" th:value="${user.getSurname()}"
-                                                                   minlength="2" maxlength="50"
-                                                                   style="width: 300px" required/>
-                                                            <br><br>
-
-                                                            <b><label for="inputAgeEdit">Age</label></b>
-                                                            <br>
-                                                            <input type="number" id="inputAgeEdit"
-                                                                   th:name="age" th:value="${user.getAge()}"
-                                                                   min="0" max="99"
-                                                                   style="width: 300px"
-                                                                   required/>
-                                                            <br><br>
-
-                                                            <b><label for="inputUsernameEdit">Username</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputUsernameEdit"
-                                                                   th:name="username" th:value="${user.getUsername()}"
-                                                                   minlength="3" maxlength="50"
-                                                                   style="width: 300px" required/>
-                                                            <br><br>
-
-                                                            <b><label for="inputPasswordEdit">Password</label></b>
-                                                            <br>
-                                                            <input type="password" id="inputPasswordEdit"
-                                                                   th:name="password" minlength="3"
-                                                                   maxlength="50" style="width: 300px" required/>
-                                                            <br><br>
-
-                                                            <b><label for="selectRoleEdit">Role</label></b>
-                                                            <br>
-                                                            <select name="rolesList" id="selectRoleEdit"
-                                                                    style="width: 300px" multiple size="3" required>
-                                                                <option th:each="role : ${roles}"
-                                                                        th:value="${role}"
-                                                                        th:text="${role}">
-                                                                </option>
-                                                            </select>
-                                                            <br><br>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">
-                                                                    Close
-                                                                </button>
-                                                                <button type="submit" class="btn btn-primary">
-                                                                    Edit
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                th:data-target="${'#deleteModal' + user.getId()}">
-                                            Delete
-                                        </button>
-                                        <div class="modal fade" th:id="${'deleteModal' + user.getId()}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Delete user</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body text-center">
-                                                        <form th:action="@{/admin/deleteUser}" method="post">
-                                                            <b><label for="inputIdDelete">ID</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputIdDelete"
-                                                                   th:name="id" th:value="${user.getId()}"
-                                                                   style="width: 300px" readonly/>
-                                                            <br><br>
-
-                                                            <b><label for="inputNameDelete">Name</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputNameDelete"
-                                                                   th:name="name" th:value="${user.getName()}"
-                                                                   minlength="2" maxlength="50"
-                                                                   style="width: 300px" disabled/>
-                                                            <br><br>
-
-                                                            <b><label for="inputSurnameDelete">Surname</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputSurnameDelete"
-                                                                   th:name="surname" th:value="${user.getSurname()}"
-                                                                   minlength="2" maxlength="50"
-                                                                   style="width: 300px" disabled/>
-                                                            <br><br>
-
-                                                            <b><label for="inputAgeDelete">Age</label></b>
-                                                            <br>
-                                                            <input type="number" id="inputAgeDelete"
-                                                                   th:name="age" th:value="${user.getAge()}"
-                                                                   min="0" max="99"
-                                                                   style="width: 300px"
-                                                                   disabled/>
-                                                            <br><br>
-
-                                                            <b><label for="inputUsernameDelete">Username</label></b>
-                                                            <br>
-                                                            <input type="text" id="inputUsernameDelete"
-                                                                   th:name="username" th:value="${user.getUsername()}"
-                                                                   minlength="3" maxlength="50"
-                                                                   style="width: 300px" disabled/>
-                                                            <br><br>
-
-                                                            <b><label for="selectRoleDelete">Role</label></b>
-                                                            <br>
-                                                            <select name="rolesList" id="selectRoleDelete"
-                                                                    style="width: 300px" multiple size="3" disabled>
-                                                                <option th:each="role : ${roles}"
-                                                                        th:value="${role}"
-                                                                        th:text="${role}">
-                                                                </option>
-                                                            </select>
-                                                            <br><br>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                        data-dismiss="modal">
-                                                                    Close
-                                                                </button>
-                                                                <button type="submit" class="btn btn-danger">
-                                                                    Delete
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </th:block>
-                            </tbody>
+                            <tbody id="adminTable"> </tbody>
                         </table>
                     </div>
                 </div>
@@ -265,65 +71,7 @@
                     <h5 class="card-header bg-light">Add new user</h5>
                     <br>
                     <div class="form-group text-center">
-                        <form th:action="@{/admin/saveUser}" method="post">
-                            <b><label for="divGender">Gender</label></b>
-                            <br>
-                            <div id="divGender">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="genderMale" th:name="gender" value="M"
-                                           class="custom-control-input" required>
-                                    <label class="custom-control-label" for="genderMale">Male</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="genderFemale" th:name="gender" value="F"
-                                           class="custom-control-input" required>
-                                    <label class="custom-control-label" for="genderFemale">Female</label>
-                                </div>
-                            </div>
-                            <br>
-
-                            <b><label for="inputName">Name</label></b>
-                            <br>
-                            <input type="text" id="inputName" th:name="name" minlength="2" maxlength="50"
-                                   style="width: 300px" required/>
-                            <br><br>
-
-                            <b><label for="inputSurname">Surname</label></b>
-                            <br>
-                            <input type="text" id="inputSurname" th:name="surname" minlength="2" maxlength="50"
-                                   style="width: 300px" required/>
-                            <br><br>
-
-                            <b><label for="inputAge">Age</label></b>
-                            <br>
-                            <input type="number" id="inputAge" th:name="age" min="0" max="99" style="width: 300px"
-                                   required/>
-                            <br><br>
-
-                            <b><label for="inputUsername">Username</label></b>
-                            <br>
-                            <input type="text" id="inputUsername" th:name="username" minlength="3" maxlength="50"
-                                   style="width: 300px" required/>
-                            <br><br>
-
-                            <b><label for="inputPassword">Password</label></b>
-                            <br>
-                            <input type="password" id="inputPassword" th:name="password" minlength="3"
-                                   maxlength="50" style="width: 300px" required/>
-                            <br><br>
-
-                            <b><label for="selectRole">Role</label></b>
-                            <br>
-                            <select name="rolesList" id="selectRole" style="width: 300px" multiple size="3" required>
-                                <option th:each="role : ${roles}"
-                                        th:value="${role}"
-                                        th:text="${role}">
-                                </option>
-                            </select>
-                            <br><br>
-
-                            <input class="btn btn-success" type="submit" value="Add new user"/>
-                        </form>
+                        <form id="formAddUser"></form>
                     </div>
                 </div>
             </div>
@@ -331,12 +79,19 @@
     </div>
 </div>
 
+<div id="modalWindow"></div>
+
 <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
         integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA="
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
         crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{js/admin.js}"></script>
+<script type="text/javascript" th:src="@{js/edit/utils.js}"></script>
+<script type="text/javascript" th:src="@{js/edit/add.js}"></script>
+<script type="text/javascript" th:src="@{js/edit/edit.js}"></script>
+<script type="text/javascript" th:src="@{js/edit/delete.js}"></script>
 
 </body>
 </html>

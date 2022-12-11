@@ -53,26 +53,13 @@
                             <th>Role</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <th:block th:object="${logged}">
-                            <tr>
-                                <td th:text="${logged.getId()}"/>
-                                <td th:text="${logged.getGender()}"/>
-                                <td th:text="${logged.getName()}"/>
-                                <td th:text="${logged.getSurname()}"/>
-                                <td th:text="${logged.getAge()}"/>
-                                <td th:text="${logged.getUsername()}"/>
-                                <td th:text="${logged.getRoles()}"/>
-                            </tr>
-                        </th:block>
-
-                        </tbody>
+                        <tbody id="userTable"> </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<script type="text/javascript" th:src="@{js/user.js}"></script>
 </body>
 </html>

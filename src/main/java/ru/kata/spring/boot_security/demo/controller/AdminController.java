@@ -31,17 +31,17 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/deleteUser")
-    public String updateEmployee(@ModelAttribute("user") User user) {
-        userService.removeUser(user.getId());
-        return "redirect:/admin";
-    }
-
-    @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user, @RequestParam("rolesList") String[] selectedRoles) {
-        userService.saveUser(user, selectedRoles);
-        return "redirect:/admin";
-    }
+//    @PostMapping("/deleteUser")
+//    public String updateEmployee(@ModelAttribute("user") User user) {
+//        userService.removeUser(user.getId());
+//        return "redirect:/admin";
+//    }
+//
+//    @PostMapping("/saveUser")
+//    public String saveUser(@ModelAttribute("user") User user, @RequestParam("rolesList") String[] selectedRoles) {
+//        userService.saveUser(user, selectedRoles);
+//        return "redirect:/admin";
+//    }
 
 
 

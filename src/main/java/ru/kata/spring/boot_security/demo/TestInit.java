@@ -33,16 +33,13 @@ public class TestInit {
         roleRepository.save(roleGuest);
 
         User admin = new User(Gender.M, "Oleg", "Kosarev", (byte) 25,
-                "admin", new BCryptPasswordEncoder().encode("admin"));
-        admin.setRoles(Set.of(roleAdmin,roleUser));
+                "admin", new BCryptPasswordEncoder().encode("admin"), Set.of(roleAdmin,roleUser));
 
         User user = new User(Gender.F, "Ekaterina", "Kosareva", (byte) 23,
-                "user", new BCryptPasswordEncoder().encode("user"));
-        user.setRoles(Set.of(roleUser));
+                "user", new BCryptPasswordEncoder().encode("user"), Set.of(roleUser));
 
         User guest = new User(Gender.M, "Just", "Guest", (byte) 20,
-                "guest", new BCryptPasswordEncoder().encode("guest"));
-        guest.setRoles(Set.of(roleGuest));
+                "guest", new BCryptPasswordEncoder().encode("guest"), Set.of(roleGuest));
 
         userRepository.save(admin);
         userRepository.save(user);
